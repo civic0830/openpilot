@@ -268,7 +268,7 @@ class CarState(CarStateBase):
       ret.stockAeb = bool(cp_cam.vl["BRAKE_COMMAND"]["AEB_REQ_1"] and cp_cam.vl["BRAKE_COMMAND"][aeb_sig] > 1e-5)
 
     self.acc_hud = False
-    self.lkas_hud = False
+    self.lkas_hud = True
     if self.CP.carFingerprint not in HONDA_BOSCH:
       ret.stockFcw = cp_cam.vl["BRAKE_COMMAND"]["FCW"] != 0
       self.acc_hud = cp_cam.vl["ACC_HUD"]
@@ -300,13 +300,13 @@ class CarState(CarStateBase):
     if CP.carFingerprint in HONDA_BOSCH_RADARLESS:
       messages += [
         ("ACC_HUD", 10),
-        ("LKAS_HUD", 10),
+        ("LKAS_HUD", 0),
       ]
 
     elif CP.carFingerprint not in HONDA_BOSCH:
       messages += [
         ("ACC_HUD", 10),
-        ("LKAS_HUD", 10),
+        ("LKAS_HUD", 0),
         ("BRAKE_COMMAND", 50),
       ]
 
